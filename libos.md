@@ -6,6 +6,10 @@
 
 运行条件配置：用aarch64 qemu启动linux，由linux开启Kvm，基于kvm启动libos；用aarch64 qemu启动xen，由xen启动libos
 
+支持sel4+microkit实现用户态和内核态运行时
+
+kvm可以使用QEMU/Fire/KVMTOOLS作为VMM，XEN使用自带的DOM0 VMM，其他的平台可以使用我们自定义的VMM
+
 sim目录下的libos相关的代码修改应该用#sym:CONFIG_LIBOS 控制，不影响原有的逻辑。改完这个后，验证下，继续跑
 
 继续做，驱动和板级支持，暂时使用qemu作为板级支持，以及virtio作为驱动支持，包括网络，磁盘（TBD：真实的评估板）
