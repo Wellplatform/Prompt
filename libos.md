@@ -31,7 +31,16 @@ sim目录下的libos相关的代码修改应该用#sym:CONFIG_LIBOS 控制，不
 继续做，将非posix应用转换为posix应用的代码翻译工具
 
 
-我的目标是改造microkit，改造点：1. microkit使用静态配置XML定义资源分配，由initialiser和tool/microkit目录的rs代码来调用sel4接口分配资源，我想用C语言重写，类似genode的结构，保留capDL initialiser的逻辑（这个思路很好）可以支持静态和动态调用sel4接口分配资源，并后续兼容更多的微内核，因此在设计时需要设计不同OS的系统调用抽象层 2. 保留loader的逻辑（为启动sel4提供环境，后续可以兼容更多的微内核） 3. monitor继续做监控异常的逻辑，但是需要扩展成支持hypervisor+VMM的逻辑，VMM可以捕获sel4传递的异常，且针对异常做CPU虚拟化，内存虚拟化以及设备/IO虚拟化的逻辑 4. libmicrokit是提供sel4应用的运行环境，这块我打算沿用这套逻辑，不过需要配合动态分配资源的逻辑的改造
+我的目标是改造microkit，改造点：
+
+1. microkit使用静态配置XML定义资源分配，由initialiser和tool/microkit目录的rs代码来调用sel4接口分配资源，我想用C语言重写，类似genode的结构，保留capDL initialiser的逻辑（这个思路很好）可以支持静态和动态调用sel4接口分配资源，并后续兼容更多的微内核（甚至是Libos），因此在设计时需要设计不同OS的系统调用抽象层
+
+2. 保留loader的逻辑（为启动sel4提供环境，后续可以兼容更多的微内核，并不是取代Uboot，而是补充微内核所必须的环境准备）
+
+3. monitor继续做监控异常的逻辑，可以处理缺页异常以及其他可以恢复的异常处理操作；需要扩展成支持hypervisor+VMM的逻辑，VMM可以捕获sel4传递的异常，且针对异常做CPU虚拟化，内存虚拟化以及设备/IO虚拟化的逻辑（VMM依赖monitor，但是额外需要其他实现支撑）
+
+4. libmicrokit是提供sel4应用的运行环境，这块我打算沿用这套逻辑，不过需要配合动态分配资源的逻辑的改造，libmicrokit库可以被monitor调用，当然也可以直接使用libos，快速获取posix接口支持
+
 
 
 ```
