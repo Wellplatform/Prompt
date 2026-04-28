@@ -22,6 +22,8 @@ sim目录下的libos相关的代码修改应该用#sym:CONFIG_LIBOS 控制，不
 
 继续做，支持mcu和mpu两个方向，mcu暂时仅支持裸机作为后端，使用arm qemu环境跑通一个POSIX demo应用
 
+继续做，支持启动多个nuttx guest
+
 继续做，为我提供一个全局的libos配置工具，包括构建选项（分多个目标），资源配置（包括以下环境：kvm/xen/sim/crun-linux-cgroup/裸机）可以用xml或yaml等方式配置内存，中断，CACHE，定时器，CPU，IO，网络，磁盘等，驱动配置（设备树），shell引导（initramfs:option）, 适合nuttx的rootfs(option)，nsh（作为调试选项的配置:option）等；这个配置工具也可以生成用于crun容器配置的config.json
 
 继续做，posix需要支持libos nuttx ltp测试，保证posix接口的覆盖度
