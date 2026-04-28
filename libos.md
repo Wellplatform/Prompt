@@ -43,4 +43,8 @@ sim目录下的libos相关的代码修改应该用#sym:CONFIG_LIBOS 控制，不
 
 支持sel4/freertos/Fuchsia作为backend
 
+支持OpenModelica作为模型载体
+
+claude-obsidian作为知识库载体
+
 ```
