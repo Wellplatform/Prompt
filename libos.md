@@ -34,6 +34,10 @@ sim目录下的libos相关的代码修改应该用#sym:CONFIG_LIBOS 控制，不
 
 支持生成一个描述资源的状态视图文件，包括预留的，初始化分配的，剩余的资源
 
+interface的函数我建议要做成一种资源标准，命名可以参考posix标准
+
+freertos支持m/r/a各一个样例，sel4支持a，fuchsia支持a
+
 我的目标是改造microkit，改造点：
 
 1. microkit使用静态配置XML定义资源分配，由initialiser和tool/microkit目录的rs代码来调用sel4接口分配资源，我想用C语言重写，类似genode的结构，保留capDL initialiser的逻辑（这个思路很好）可以支持静态和动态调用sel4接口分配资源，并后续兼容更多的微内核（甚至是Libos），因此在设计时需要设计不同OS的系统调用抽象层
