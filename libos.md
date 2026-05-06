@@ -48,7 +48,7 @@ freertos支持m/r/a各一个样例，sel4支持a，fuchsia支持a
 
 4. libmicrokit是提供sel4应用的运行环境，这块我打算沿用这套逻辑，不过需要配合动态分配资源的逻辑的改造，libmicrokit库可以被monitor调用，当然也可以直接使用libos，快速获取posix接口支持
 
-支持sel4/freertos/Fuchsia作为backend
+支持sel4/freertos/Fuchsia/libos+lkvm作为backend
 
 支持OpenModelica作为模型载体
 
